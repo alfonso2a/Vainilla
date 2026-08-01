@@ -1,12 +1,166 @@
-vainilla/
-│── index.html
-│── css/
-│     style.css
-│── js/
-│     clima.js
-│     produccion.js
-│     graficos.js
-│     simulador.js
-│── datos/
-│     clima.json
-│── img/
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Simulador de Cosecha de Vainilla</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f2f6f3;
+    margin:40px;
+}
+
+.container{
+    width:700px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0px 0px 20px rgba(0,0,0,.2);
+}
+
+h1{
+    color:#1e5631;
+    text-align:center;
+}
+
+label{
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    margin-bottom:20px;
+    border-radius:8px;
+    border:1px solid #bbb;
+}
+
+button{
+
+background:#1e5631;
+color:white;
+padding:15px;
+width:100%;
+border:none;
+font-size:18px;
+border-radius:10px;
+cursor:pointer;
+
+}
+
+button:hover{
+background:#2f8f46;
+}
+
+.resultado{
+margin-top:30px;
+background:#eef8ef;
+padding:20px;
+border-radius:10px;
+font-size:18px;
+}
+
+.valor{
+color:#1e5631;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🌿 Simulador de Producción de Vainilla</h1>
+
+<label>Número de Plantas</label>
+
+<input type="number" id="plantas" value="1000">
+
+<label>Vainas por Planta</label>
+
+<input type="number" id="vainas" value="30">
+
+<label>Peso promedio por vaina (gramos)</label>
+
+<input type="number" id="peso" value="5">
+
+<label>Precio de Venta por Kg (USD)</label>
+
+<input type="number" id="precio" value="350">
+
+<label>Costo Total de Producción (USD)</label>
+
+<input type="number" id="costos" value="12000">
+
+<button onclick="calcular()">Calcular Producción</button>
+
+<div class="resultado">
+
+<p>Total de Vainas:
+<span class="valor" id="tv"></span></p>
+
+<p>Producción Total (Kg):
+<span class="valor" id="kg"></span></p>
+
+<p>Ingresos Totales:
+<span class="valor" id="ingresos"></span></p>
+
+<p>Utilidad Estimada:
+<span class="valor" id="utilidad"></span></p>
+
+<p>Rentabilidad:
+<span class="valor" id="rentabilidad"></span></p>
+
+</div>
+
+</div>
+
+<script>
+
+function calcular(){
+
+let plantas=parseFloat(document.getElementById("plantas").value);
+
+let vainas=parseFloat(document.getElementById("vainas").value);
+
+let peso=parseFloat(document.getElementById("peso").value);
+
+let precio=parseFloat(document.getElementById("precio").value);
+
+let costos=parseFloat(document.getElementById("costos").value);
+
+let totalVainas=plantas*vainas;
+
+let kilos=(totalVainas*peso)/1000;
+
+let ingresos=kilos*precio;
+
+let utilidad=ingresos-costos;
+
+let rentabilidad=(utilidad/costos)*100;
+
+document.getElementById("tv").innerHTML=totalVainas.toLocaleString();
+
+document.getElementById("kg").innerHTML=kilos.toFixed(2)+" Kg";
+
+document.getElementById("ingresos").innerHTML="$ "+ingresos.toFixed(2);
+
+document.getElementById("utilidad").innerHTML="$ "+utilidad.toFixed(2);
+
+document.getElementById("rentabilidad").innerHTML=rentabilidad.toFixed(2)+" %";
+
+}
+
+calcular();
+
+</script>
+
+</body>
+</html>
